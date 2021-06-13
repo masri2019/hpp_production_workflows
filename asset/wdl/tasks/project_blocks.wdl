@@ -51,7 +51,7 @@ task projectRef2Asm {
         # to turn off echo do 'set +o xtrace'
         set -o xtrace
 
-        python3 ${PROJECT_BLOCKS_PY} --mode 'ref2asm' --paf ~{asm2refPaf} --blocks ~{refBlocksBed} --projectableBed projectable.bed --projectionBed ~{sampleName}.~{suffix}.bed
+        python3 ${PROJECT_BLOCKS_PY} --mode 'ref2asm' --paf ~{asm2refPaf} --blocks ~{refBlocksBed} --outputProjectable projectable.bed --outputProjection ~{sampleName}.~{suffix}.bed
         mkdir output
         bedtools sort -i ~{sampleName}.~{suffix}.bed | bedtools merge -i - > output/~{sampleName}.~{suffix}.bed
 

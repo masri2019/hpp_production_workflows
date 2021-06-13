@@ -30,8 +30,8 @@ task projectRef2Asm {
     input {
         File refBlocksBed
         File asm2refPaf
-        File sampleName
-        File suffix
+        String sampleName
+        String suffix
         # runtime configurations
         Int memSize=4
         Int threadCount=2

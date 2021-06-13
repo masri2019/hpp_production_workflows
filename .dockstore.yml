@@ -117,3 +117,6 @@ workflows:
    -  name: DownSampling
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/down_sampling.wdl
+   -  name: ProjectBlocks
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/project_blocks.wdl

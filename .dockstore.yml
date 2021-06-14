@@ -138,3 +138,6 @@ workflows:
    -  name: LongReadAlignerSplit
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/long_read_aligner_split.wdl
+   -  name: UnionBedFiles
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/union_bed_files.wdl

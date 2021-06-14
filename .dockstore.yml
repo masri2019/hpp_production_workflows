@@ -135,3 +135,6 @@ workflows:
    -  name: SubsetCoverage
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/subset_coverage.wdl
+   -  name: LongReadAlignerSplit
+      subclass: WDL
+      primaryDescriptionPath: /asset/wdl/tasks/long_read_aligner_split.wdl

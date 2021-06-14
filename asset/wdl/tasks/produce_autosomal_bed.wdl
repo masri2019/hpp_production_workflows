@@ -12,7 +12,7 @@ workflow produceAutosomalBed {
     }
     call bedtools_t.union {
        input:
-          bedFiles = [nonCntr_nonSex_nonMito_bed, chrX_PAR_bed, chrY_PAR_bed]
+          bedFiles = [nonCntr_nonSex_nonMito_bed, chrX_PAR_bed, chrY_PAR_bed],
           outputPrefix = basename("${assemblyFastaGz}", ".fa.gz") + ".${suffix}"
     }
     output {

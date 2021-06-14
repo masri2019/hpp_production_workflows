@@ -120,3 +120,9 @@ workflows:
    -  name: ProjectBlocks
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/project_blocks.wdl
+   -  name: ProjectBlocksMale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/project_blocks_male.wdl
+   -  name: ProjectBlocksFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/project_blocks_female.wdl

@@ -132,3 +132,6 @@ workflows:
    -  name: ProduceSexBed
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/produce_sex_bed.wdl
+   -  name: SubsetCoverage
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/subset_coverage.wdl

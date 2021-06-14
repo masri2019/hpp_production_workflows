@@ -12,7 +12,8 @@ workflow runProjectBlocks {
     call bam2paf_t.bam2paf {
        input:
            bamFile = asm2refBam,
-           minMAPQ = 0
+           minMAPQ = 0,
+           primaryOnly = "yes"
     }
     call projectRef2Asm {
         input:

@@ -7,6 +7,7 @@ task bam2paf{
     input{
         File bamFile
         Int minMAPQ
+        String primaryOnly = "no"
         # runtime configurations
         Int memSize=16
         Int threadCount=4
@@ -28,7 +29,12 @@ task bam2paf{
 
         # Convert bam to paf using https://github.com/lh3/minimap2/blob/master/misc/paftools.js
         FILENAME=$(basename ~{bamFile})
-        k8 ${PAFTOOLS_PATH} sam2paf <(samtools view -h -q ~{minMAPQ} ~{bamFile}) > ${FILENAME%.*}.paf
+        if [[ ~{primaryOnly} = "no" ]]
+        then
+            k8 ${PAFTOOLS_PATH} sam2paf <(samtools view -h -q ~{minMAPQ} ~{bamFile}) > ${FILENAME%.*}.paf
+        else
+            k8 ${PAFTOOLS_PATH} sam2paf <(samtools view -h -q ~{minMAPQ} -F256 -F4 ~{bamFile}) > ${FILENAME%.*}.paf
+        fi
     >>>
     runtime {
         docker: dockerImage

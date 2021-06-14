@@ -126,3 +126,9 @@ workflows:
    -  name: ProjectBlocksFemale
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/project_blocks_female.wdl
+   -  name: ProduceAutosomalBed 
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/produce_autosomal_bed.wdl
+   -  name: ProduceSexBed
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/produce_sex_bed.wdl

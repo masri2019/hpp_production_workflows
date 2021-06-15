@@ -141,3 +141,6 @@ workflows:
    -  name: UnionBedFiles
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/union_bed_files.wdl
+   -  name: ExclusionStep
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/exclusion_step.wdl

@@ -141,9 +141,12 @@ workflows:
    -  name: UnionBedFiles
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/union_bed_files.wdl
-   -  name: ExclusionStep
+   -  name: ExclusionStepMale
       subclass: WDL
-      primaryDescriptorPath: /asset/wdl/tasks/exclusion_step.wdl
+      primaryDescriptorPath: /asset/wdl/tasks/exclusion_step_male.wdl
+   -  name: ExclusionStepFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/exclusion_step_female.wdl
    -  name: FillGapsMale
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/fill_gaps_male.wdl

@@ -144,3 +144,9 @@ workflows:
    -  name: ExclusionStep
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/exclusion_step.wdl
+   -  name: FillGapsMale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/fill_gaps_male.wdl
+   -  name: FillGapsFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/fill_gaps_female.wdl

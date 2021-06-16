@@ -22,6 +22,7 @@ ENV COV2COUNTS_C=/home/scripts/bin/cov2counts
 ENV COV_FREQ_DIST_PY=/home/scripts/coverage_frequency_distribution.py
 ENV FIT_MODEL_PY=/home/scripts/fit_model.py 
 ENV PROJECT_BLOCKS_PY=/home/scripts/project_blocks.py
+ENV ASSIGN_GAPS_PY=/home/scripts/assign_gaps.py
 
 ## UCSC convention is to work in /data
 RUN mkdir -p /data

@@ -52,7 +52,7 @@ task fillGaps {
         do
             PREFIX=$(basename ${IN_BED%.bed})
             cat ${IN_BED} ${PREFIX}.gaps.bed | bedtools sort -i - | bedtools merge -i - > ${PREFIX}.filled_gaps.bed
-            echo ${PREFIX}.filled_gaps.bed >> output_list.txt
+            printf "${PREFIX}.filled_gaps.bed " >> output_list.txt
         done
     >>> 
     runtime {
@@ -64,7 +64,7 @@ task fillGaps {
     }
     
     output {
-        Array[File] filledBedFiles = read_lines("output_list.txt")
+        Array[File] filledBedFiles = glob(read_lines("output_list.txt"))
     }
 }
 

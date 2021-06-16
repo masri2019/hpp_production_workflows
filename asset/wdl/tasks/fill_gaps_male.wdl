@@ -64,7 +64,7 @@ task fillGaps {
     }
     
     output {
-        Array[File] filledBedFiles = glob(read_lines("output_list.txt"))
+        Array[File] filledBedFiles = glob(read_string("output_list.txt"))
     }
 }
 

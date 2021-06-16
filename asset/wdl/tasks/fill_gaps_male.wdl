@@ -54,6 +54,7 @@ task fillGaps {
             cat ${IN_BED} ${PREFIX}.gaps.bed | bedtools sort -i - | bedtools merge -i - > ${PREFIX}.filled_gaps.bed
             printf "${PREFIX}.filled_gaps.bed " >> output_list.txt
         done
+        printf "\n" >> output_list.txt
     >>> 
     runtime {
         docker: dockerImage

@@ -12,7 +12,7 @@ task subsetCoverage {
     input {
         File coverageGz
         File blocksBed
-        File suffix
+        String suffix
         # runtime configurations
         Int memSize=8
         Int threadCount=4

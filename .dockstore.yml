@@ -156,3 +156,9 @@ workflows:
    -  name: FillGapsFemale
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/fill_gaps_female.wdl
+   -  name: SubsetCoverageMale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/subset_coverage_male.wdl
+   -  name: SubsetCoverageFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/subset_coverage_female.wdl

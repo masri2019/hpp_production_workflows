@@ -15,17 +15,20 @@ workflow runCov2CountsMale {
         File pat_autosome_cntr_CoverageGz
         File pat_sex_cntr_CoverageGz
     }
-    scatter matCovGz in [mat_autosome_nonCntr_CoverageGz, mat_sex_nonCntr_CoverageGz, mat_autosome_cntr_CoverageGz, mat_sex_cntr_CoverageGz]{
-        call cov2couts_t.cov2counts as matCounts {
-            coverageGz = matCovGz
+    scatter (matCovGz in [mat_autosome_nonCntr_CoverageGz, mat_sex_nonCntr_CoverageGz, mat_autosome_cntr_CoverageGz, mat_sex_cntr_CoverageGz]){
+        call cov2counts_t.cov2counts as matCounts {
+            input:
+                coverageGz = matCovGz
         }
     }
-    scatter patCovGz in [pat_autosome_nonCntr_CoverageGz, pat_sex_nonCntr_CoverageGz, pat_autosome_cntr_CoverageGz, pat_sex_cntr_CoverageGz]{
-        call cov2couts_t.cov2counts as patCounts {
-            coverageGz = patCovGz
+    scatter (patCovGz in [pat_autosome_nonCntr_CoverageGz, pat_sex_nonCntr_CoverageGz, pat_autosome_cntr_CoverageGz, pat_sex_cntr_CoverageGz]){
+        call cov2counts_t.cov2counts as patCounts {
+            input:
+                coverageGz = patCovGz
         }
     }
     output {
+        #mat
         File mat_autosome_nonCntr_Counts = matCounts.counts[0]
         File mat_sex_nonCntr_Counts = matCounts.counts[1]
         File mat_autosome_cntr_Counts = matCounts.counts[2]

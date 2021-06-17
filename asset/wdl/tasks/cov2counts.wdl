@@ -2,12 +2,13 @@ version 1.0
 
 workflow runCov2Counts{
     call cov2counts
+    output {
+        File counts = cov2counts.counts
+    }
 }
 task cov2counts {
     input {
-        File coverageFile
-        String sampleName
-        String sampleSuffix
+        File coverageGz
         # runtime configurations
         Int memSize=8
         Int threadCount=4
@@ -27,8 +28,11 @@ task cov2counts {
         # to turn off echo do 'set +o xtrace'
         set -o xtrace
 
-        ${COV2COUNTS_C} -i ~{coverageFile} -o ~{sampleName}.~{sampleSuffix}.counts 
-        pigz -p4 -c ~{coverageFile} > ~{sampleName}.~{sampleSuffix}.cov.gz
+        FILENAME=$(basename ~{coverageGz})
+        PREFIX=${FILENAME%.cov.gz}
+        
+        gunzip -c ~{coverageGz} > ${PREFIX}.cov
+        ${COV2COUNTS_C} -i ${PREFIX}.cov -o ${PREFIX}.counts
     >>> 
     runtime {
         docker: dockerImage
@@ -38,8 +42,7 @@ task cov2counts {
         preemptible : preemptible
     }
     output {
-        File coverageGz = "${sampleName}.${sampleSuffix}.cov.gz"
-        File counts = "${sampleName}.${sampleSuffix}.counts"
+        File counts = glob("*.counts")[0]
     }
 }
 

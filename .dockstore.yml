@@ -162,3 +162,10 @@ workflows:
    -  name: SubsetCoverageFemale
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/subset_coverage_female.wdl
+   -  name: Cov2CountsMale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/cov2counts_male.wdl
+   -  name: Cov2CountsFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/cov2counts_female.wdl
+

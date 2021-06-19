@@ -30,7 +30,9 @@ task fitModel {
         # to turn off echo do 'set +o xtrace'
         set -o xtrace
 
-        python3 ${FIT_MODEL_PY} --counts ~{counts} --output ~{sampleName}.~{sampleSuffix}.table
+        FILENAME=$(basename ~{counts})
+        PREFIX=${FILENAME%.counts}
+        python3 ${FIT_MODEL_EXTRA_PY} --counts ~{counts} --output ${PREFIX}.table
     >>> 
     runtime {
         docker: dockerImage
@@ -40,7 +42,7 @@ task fitModel {
         preemptible : preemptible
     }
     output {
-        File probabilityTable = "${sampleName}.${sampleSuffix}.table"
+        File probabilityTable = glob("*.table")[0]
     }
 }
 

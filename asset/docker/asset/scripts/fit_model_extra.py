@@ -30,7 +30,7 @@ def main():
     Y = [scale_factor * y for y in Y]
     # print the probability table
     with open(outputPath,"w+") as f:
-        f.write("#coverage\tfreq\tfitted\terror\textra\thaploid\tcollapsed\n")
+        f.write("#coverage\tfreq\tfit\terror\textra\thaploid\tcollapsed\n")
         for cov in range(len(counts)):
             prob_err = cov_model.probability_erroneous(cov)
             prob_extra = cov_model.probability_extra(cov)

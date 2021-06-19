@@ -9,8 +9,6 @@ workflow runFitModel{
 task fitModel {
     input {
         File counts
-        String sampleName
-        String sampleSuffix
         # runtime configurations
         Int memSize=4
         Int threadCount=2

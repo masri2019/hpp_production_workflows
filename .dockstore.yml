@@ -168,4 +168,9 @@ workflows:
    -  name: Cov2CountsFemale
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/cov2counts_female.wdl
-
+   -  name: FitModelMale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/fit_model_male.wdl
+   -  name: FitModelFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/fit_model_female.wdl

@@ -19,7 +19,13 @@ def main():
             cov = int(attrbs[0])
             freq = int(attrbs[1])
             counts[cov] = freq
-    
+   
+    if sum(counts.values()) == 0:
+        with open(outputPath,"w+") as f:
+            f.write("#coverage\tfreq\tfit\terror\textra\thaploid\tcollapsed\n")
+            for cov in range(len(counts)):
+                f.write("{:d}".format(cov) + "\t0" * 6 + "\n")
+        return
     # fit the model
     cov_model = CoverageDistribution.fit(counts, tol = 1e-4, max_iters=500)
     # find the fitted distribution

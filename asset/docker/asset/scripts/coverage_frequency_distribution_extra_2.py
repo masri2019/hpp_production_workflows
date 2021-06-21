@@ -262,7 +262,8 @@ class CoverageDistribution:
         cov_at_max_frequency = None
         max_frequency = -1
         has_increased = False
-        max_spectrum = max(spectrum.values())
+        freq_l = list(spectrum.values())
+        max_spectrum = max(freq_l[1:])
         for cov_value in sorted(spectrum)[1:]:
             if cov_value - 1 in spectrum:
                 if spectrum[cov_value] > spectrum[cov_value - 1]:

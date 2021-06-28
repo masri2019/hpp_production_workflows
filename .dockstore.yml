@@ -177,3 +177,9 @@ workflows:
    -  name: FitModelFemale
       subclass: WDL
       primaryDescriptorPath: /asset/wdl/tasks/fit_model_female.wdl
+   -  name: FindBlocksMale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/find_blocks_male.wdl
+   -  name: FindBlocksFemale
+      subclass: WDL
+      primaryDescriptorPath: /asset/wdl/tasks/find_blocks_female.wdl

@@ -1,4 +1,4 @@
-from coverage_frequency_distribution_extra_2 import CoverageDistribution
+from coverage_frequency_distribution_extra_constrained import CoverageDistribution
 from collections import defaultdict
 import sys
 import argparse

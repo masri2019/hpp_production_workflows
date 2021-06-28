@@ -36,10 +36,10 @@ workflow runFitModelFemale {
     }
     output {
         #mat
-        File mat_autosome_nonCntr_Bed = matBlocks.bed[0]
-        File mat_autosome_cntr_Bed = matBlocks.bed[1]
+        Array[File] mat_autosome_nonCntr_Bed = matBlocks.bedFiles[0]
+        Array[File] mat_autosome_cntr_Bed = matBlocks.bedFiles[1]
         #pat
-        File pat_autosome_nonCntr_Bed = patBlocks.bed[0]
-        File pat_autosome_cntr_Bed = patBlocks.bed[1]
+        Array[File] pat_autosome_nonCntr_Bed = patBlocks.bedFiles[0]
+        Array[File] pat_autosome_cntr_Bed = patBlocks.bedFiles[1]
     }
 }

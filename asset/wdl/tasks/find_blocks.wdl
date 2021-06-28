@@ -3,7 +3,7 @@ version 1.0
 workflow runFindBlocks{
     call findBlocks
     output {
-        File bed = findBlocks.bed
+        Array[File] bedFiles = findBlocks.bedFiles
     }
 }
 
@@ -45,6 +45,6 @@ task findBlocks {
         preemptible : preemptible
     }
     output {
-        File bed = glob("*.bed")[0]
+        Array[File] bedFiles = glob("*.bed")
     }
 }

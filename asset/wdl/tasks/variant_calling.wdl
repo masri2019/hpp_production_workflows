@@ -103,7 +103,7 @@ task callVariant{
         File bam
         File assemblyFastaGz
         File bed
-        String mpileupOptions="-a FORMAT/AD -a INFO/AD -min-MQ 0 --no-BAQ -d 10000"
+        String mpileupOptions="-a FORMAT/AD -a INFO/AD --min-MQ 0 --no-BAQ -d 10000"
         String callOptions="-mv"
         # runtime configurations
         Int memSize=32

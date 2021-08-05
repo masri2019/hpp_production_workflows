@@ -5,7 +5,6 @@ workflow VariantCalling{
         File assemblyFastaGz
         File bam
         File bamIndex
-        Int ploidy = 2
         Int numberOfCallerNodes=16
         Int nodeThreadCount=16
         String sampleName
@@ -25,8 +24,7 @@ workflow VariantCalling{
             input:
                 assemblyFastaGz = assemblyFastaGz,
                 bam = part.left,
-                bed = part.right,
-                ploidy = ploidy
+                bed = part.right
         }
     }
     call mergeVcf{
@@ -105,7 +103,8 @@ task callVariant{
         File bam
         File assemblyFastaGz
         File bed
-        Int ploidy
+        String mpileupOptions="-a FORMAT/AD -a INFO/AD -min-MQ 0 --no-BAQ -d 10000"
+        String callOptions="-mv"
         # runtime configurations
         Int memSize=32
         Int threadCount=16
@@ -142,7 +141,7 @@ task callVariant{
 
         ## run the variant caller for each small temporary bed file
         mkdir vcf_files
-        seq 1 ~{threadCount} | xargs -I {} -n 1 -P ~{threadCount} sh -c "bcftools mpileup -a FORMAT/AD -a INFO/AD -q20 -B -d 100000 -f asm.fa -R split_beds/tmp_{}.bed ${BAM_PREFIX}.bam | bcftools call -cv --ploidy ~{ploidy} -Oz -o vcf_files/tmp.{}.vcf.gz"
+        seq 1 ~{threadCount} | xargs -I {} -n 1 -P ~{threadCount} sh -c "bcftools mpileup ~{mpileupOptions} -f asm.fa -R split_beds/tmp_{}.bed ${BAM_PREFIX}.bam | bcftools call ~{callOptions} -Oz -o vcf_files/tmp.{}.vcf.gz"
         
         ## make a header for the merged vcf file
         zcat vcf_files/tmp.1.vcf.gz | awk 'substr($0,1,1) == "#"' | awk -v colname="${BAM_PREFIX}" '{if ($1 == "#CHROM"){ for(i =1; i < 10; i++){printf("%s\t",$i)}; printf("%s\n",colname)} else {print $0}}' > merged.vcf

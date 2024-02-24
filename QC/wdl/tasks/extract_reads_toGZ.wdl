@@ -27,6 +27,7 @@ task extractReadstoGZ {
     input {
         File readFile
         File? referenceFasta
+        Boolean sortByName = false
         String excludeString="" # exclude lines with this string from fastq
         String fastqOptions = ""
         Int memSizeGB = 4
@@ -52,22 +53,37 @@ task extractReadstoGZ {
         PREFIX="${FILENAME%.*}"
         SUFFIX="${FILENAME##*.}"
 
+        
         mkdir output
+        SORT_BY_NAME=~{true="yes" false="no" sortByName}
 
         if [[ "$SUFFIX" == "bam" ]] ; then
-            samtools fastq ~{fastqOptions} -@~{threadCount} ~{readFile} | pigz -p~{threadCount} > output/${PREFIX}.fq.gz
+            if [[ ${SORT_BY_NAME} == "yes" ]]; then
+                samtools sort -@~{threadCount} -n ~{readFile} | \
+                         samtools fastq ~{fastqOptions} -@~{threadCount} - | \
+                         pigz -p~{threadCount} > output/${PREFIX}.fq.gz
+            else
+                samtools fastq ~{fastqOptions} -@~{threadCount} ~{readFile} | \
+                         pigz -p~{threadCount} > output/${PREFIX}.fq.gz
+            fi
         elif [[ "$SUFFIX" == "cram" ]] ; then
             if [[ ! -f "~{referenceFasta}" ]] ; then
                 echo "Could not extract $FILENAME, reference file not supplied"
                 exit 1
             fi
             ln -s ~{referenceFasta}
-            samtools fastq ~{fastqOptions} -@~{threadCount} --reference `basename ~{referenceFasta}` ~{readFile} | pigz -p~{threadCount} > output/${PREFIX}.fq.gz
+            if [[ ${SORT_BY_NAME} == "yes" ]]; then
+                samtools sort -@~{threadCount} -n --reference `basename ~{referenceFasta}` -O bam ~{readFile} | \
+                         samtools fastq ~{fastqOptions} -@~{threadCount} - | \
+                         pigz -p~{threadCount} > output/${PREFIX}.fq.gz 
+            else
+                samtools fastq ~{fastqOptions} -@~{threadCount} --reference `basename ~{referenceFasta}` ~{readFile} | \
+                         pigz -p~{threadCount} > output/${PREFIX}.fq.gz
+            fi
         elif [[ "$SUFFIX" == "gz" ]] ; then
-            ln -s ~{readFile} output/${PREFIX}.gz
+            cp ~{readFile} output/${PREFIX}.gz
         elif [[ "$SUFFIX" == "fastq" ]] || [[ "$SUFFIX" == "fq" ]] ; then
             cat ~{readFile} | pigz -p~{threadCount} > output/${PREFIX}.fq.gz
-
         elif [[ "$SUFFIX" != "fastq" ]] && [[ "$SUFFIX" != "fq" ]] && [[ "$SUFFIX" != "fasta" ]] && [[ "$SUFFIX" != "fa" ]] ; then
             echo "Unsupported file type: ${SUFFIX}"
             exit 1

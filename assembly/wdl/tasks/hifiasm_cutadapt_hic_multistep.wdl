@@ -1,4 +1,4 @@
-version 1.1
+version 1.0
 
 import "../../../QC/wdl/tasks/extract_reads_toGZ.wdl" as extractReadsToGZ_t
 import "filter_hifi_adapter.wdl" as adapter_t

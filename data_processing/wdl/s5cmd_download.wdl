@@ -1,4 +1,4 @@
-version 1.1
+version 1.0
 
 workflow s3_download_s5cmd_wf {
     meta {

@@ -1,4 +1,4 @@
-version 1.1
+version 1.0
 
 workflow filter_reads_bam_wf {
     meta {

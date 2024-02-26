@@ -1,4 +1,4 @@
-version 1.0
+version 1.1
 
 ## pulled from: https://raw.githubusercontent.com/biomonika/HPP/main/assembly/wdl/workflows/findAssemblyBreakpoints.wdl
 

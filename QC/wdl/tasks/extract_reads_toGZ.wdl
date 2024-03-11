@@ -81,7 +81,7 @@ task extractReadstoGZ {
                          pigz -p~{threadCount} > output/${PREFIX}.fq.gz
             fi
         elif [[ "$SUFFIX" == "gz" ]] ; then
-            cp ~{readFile} output/${PREFIX}.gz
+            ln -s ~{readFile} output/${PREFIX}.gz
         elif [[ "$SUFFIX" == "fastq" ]] || [[ "$SUFFIX" == "fq" ]] ; then
             cat ~{readFile} | pigz -p~{threadCount} > output/${PREFIX}.fq.gz
         elif [[ "$SUFFIX" != "fastq" ]] && [[ "$SUFFIX" != "fq" ]] && [[ "$SUFFIX" != "fasta" ]] && [[ "$SUFFIX" != "fa" ]] ; then
